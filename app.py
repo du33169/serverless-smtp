@@ -14,8 +14,7 @@ assert server is not None, "SMTP_SERVER is not set"
 assert account is not None, "SMTP_ACCOUNT is not set"
 assert password is not None, "SMTP_PASSWORD is not set"
 
-
-secure = True if secure == '1' else False
+secure = True if secure is not None and int(secure) == 1 else False
 if port is None:
 	port = 465
 port=int(port)

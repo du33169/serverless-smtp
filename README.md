@@ -1,4 +1,6 @@
-# LeanCloud SMTP Email Service
+# Serverless SMTP Email Service
+
+A Serverless application used to send email (using SMTP) from http request. 
 
 ## Deploy
 ### Environment Variables
@@ -55,5 +57,5 @@ The application accept POST requests with json payload. Required fields:
 An example to invoke the application using curl:
 
 ```bash
-curl -X POST http://address:port -H "Content-Type: application/json" -d '{	"SenderName": "John Doe","to_addrs": ["you@example.com"],	"subject": "Title",	"content": "Hello World!"}'
+curl -X POST http://address:port -H "Content-Type: application/json" -d '{"SenderName": "John Doe","to_addrs": ["you@example.com"],"subject": "Title","content": "Hello World!"}'
 ```
