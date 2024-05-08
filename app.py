@@ -21,20 +21,25 @@ port=int(port)
 smtp=SMTP(server=server,account=account,password=password,secure=secure,port=port)
 
 app = Flask(__name__)
-@app.route('/', methods=['POST'])
+@app.route('/', methods=['GET','POST'])
 def mail():
-	# get SenderName,to_addrs,subject,content from request in json
-	sender_name = request.json.get('SenderName')
-	to_addrs = request.json.get('to_addrs')
-	subject = request.json.get('subject')
-	content = request.json.get('content')
+	if request.method == 'GET':
+		return "Serverless SMTP Service is running, but you should use POST with json payload."
+	
+	elif request.method == 'POST':
+		# get SenderName,to_addrs,subject,content from request in json
+		sender_name = request.json.get('SenderName')
+		to_addrs = request.json.get('to_addrs')
+		subject = request.json.get('subject')
+		content = request.json.get('content')
 
-	# send email
-	try:
-		suc,msg=smtp.send_mail(sender_name,to_addrs,subject,content)
-	except Exception as e:
-		return f"error: {e}"
-	return msg
+		# send email
+		try:
+			suc,msg=smtp.send_mail(sender_name,to_addrs,subject,content)
+		except Exception as e:
+			return f"error: {e}"
+		return msg
 
 if __name__ == '__main__':
+	# not recommended for production use
 	app.run(debug=True,host='0.0.0.0')
