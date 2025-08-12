@@ -41,7 +41,12 @@ class SMTP:
         # connect smtp
         try:
             print(f'connecting to server {self.server} port {self.port}')
-            client = smtplib.SMTP_SSL(self.server, self.port) if self.secure else smtplib.SMTP(self.server, self.port)
+            if self.secure:
+                print('SSL enabled')
+                client = smtplib.SMTP_SSL(self.server, self.port)  
+            else:
+                print('SSL disabled')
+                client = smtplib.SMTP(self.server, self.port)
         except Exception as e:
             msg=f'connection failed:{e}'
             print(msg)

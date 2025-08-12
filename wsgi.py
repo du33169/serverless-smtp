@@ -2,7 +2,7 @@ import os
 from gevent.pywsgi import WSGIServer
 from geventwebsocket.handler import WebSocketHandler
 
-from app import app
+from app_flask import app
 application = app
 
 PORT = int(os.environ['LEANCLOUD_APP_PORT'])

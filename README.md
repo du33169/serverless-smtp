@@ -37,9 +37,21 @@ If you host the application on any cloud provider, there is somewhere in their d
 2. Set environment variables as described before
 3. start the application:
 	```python
-	python app.py
+	# use flask
+	python app_flask.py
+	# use python-builtin http server
+	python app_builtin.py
 	```
-	
+
+### Deploy to Huawei Cloud Function Graph
+
+1. upload `app_builtin.py, SMTP.py`
+2. create new file named `bootstrap`, with following content:
+   ```bash
+   /opt/function/runtime/python3.9/rtsp/python/bin/python3 $RUNTIME_CODE_ROOT/app_builtin.py
+   ```
+3. set environment variables as described before
+4. create API trigger (APIG)
 
 **Note**: you may need to manually adjust the code in app.py to listen on the correct address and port.
 
